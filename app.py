@@ -250,3 +250,5 @@ ui.tableWidget_2.setDisabled(True)
 ui.tableWidget_3.setDisabled(True)
 ui.lineEdit.returnPressed.connect(ui.pushButton.click)
 sys.exit(app.exec_())
+
+# added a comment at the end of file
