@@ -17,13 +17,11 @@ def build_orders_query(client):
 
 
 def build_client_check_query(client):
-    sql = "SELECT ID FROM CLIENT WHERE DESCRIPTION = '" + client + "'"
-    return sql
+    return f'SELECT ID FROM CLIENT WHERE DESCRIPTION = \'{client}\''
 
 
 def build_check_data_query(client):
-    sql = "SELECT 1 FROM V_OP_NOW_ATK WHERE CLIENT_CODE = '" + client + "'"
-    return sql
+    return f'SELECT 1 FROM V_OP_NOW_ATK WHERE CLIENT_CODE = \'{client}\''
 
 
 def build_containers_query(order):
