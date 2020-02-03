@@ -9,11 +9,10 @@ db = 'wms/oracle@192.168.40.20/wmsdb'
 
 
 def build_orders_query(client):
-    sql = "SELECT ORDER_SDID, ORDER_STATUS, ORDER_CREATED FROM V_OP_NOW_ATK " \
-          "WHERE CLIENT_CODE = '" + client + "'" + \
-          "GROUP BY ORDER_SDID, ORDER_STATUS, ORDER_CREATED " \
-          "ORDER BY 3"
-    return sql
+    return f'SELECT ORDER_SDID, ORDER_STATUS, ORDER_CREATED FROM V_OP_NOW_ATK ' \
+        f'WHERE CLIENT_CODE = \'{client}\' ' \
+        f'GROUP BY ORDER_SDID, ORDER_STATUS, ORDER_CREATED ' \
+        f'ORDER BY 3'
 
 
 def build_client_check_query(client):
@@ -25,15 +24,11 @@ def build_check_data_query(client):
 
 
 def build_containers_query(order):
-    sql = "SELECT DISTINCT NAME_CONT, NAME_LOC FROM V_OP_NOW_ATK " \
-          "WHERE ORDER_SDID = '" + order + "' ORDER BY 1"
-    return sql
+    return f'SELECT DISTINCT NAME_CONT, NAME_LOC FROM V_OP_NOW_ATK WHERE ORDER_SDID = \'{order}\' ORDER BY 1'
 
 
 def build_sku_query(cnt):
-    sql = "SELECT SKU_CODE, SKU_NAME, LOAD_QTY, SKU_MULTIPLICITY FROM V_OP_NOW_ATK " \
-          "WHERE NAME_CONT = '" + cnt + "'"
-    return sql
+    return f'SELECT SKU_CODE, SKU_NAME, LOAD_QTY, SKU_MULTIPLICITY FROM V_OP_NOW_ATK WHERE NAME_CONT = \'{cnt}\''
 
 
 def check_client_name(client):
@@ -41,10 +36,7 @@ def check_client_name(client):
     for symbol in client:
         if not symbol.isdigit():
             bad_char += 1
-    if bad_char > 0:
-        return False
-    else:
-        return True
+    return bad_char == 0
 
 
 def check_client_exists(client):
@@ -55,10 +47,7 @@ def check_client_exists(client):
     for rec in cursor.fetchall():
         id_list.append(rec)
     conn.close()
-    if len(id_list) > 0:
-        return True
-    else:
-        return False
+    return len(id_list) > 0
 
 
 def check_data_exists(client):
@@ -69,10 +58,7 @@ def check_data_exists(client):
     for rec in cursor.fetchall():
         res.append(rec)
     conn.close()
-    if len(res) > 0:
-        return True
-    else:
-        return False
+    return len(res) > 0
 
 
 def get_info(client):
