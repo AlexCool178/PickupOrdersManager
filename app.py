@@ -116,7 +116,7 @@ def load_selected_order_info():
     ui.tableWidget_2.clear()
     row = ui.tableWidget.currentRow()
     order = ui.tableWidget.item(row, 0).text()
-    ui.label_4.setText('Грузоместа по заказу ' + order)
+    ui.label_4.setText(f'Грузоместа по заказу {order}')
     ui.tableWidget_2.setHorizontalHeaderLabels(['Контейнер', 'В ячейке'])
     ui.tableWidget_2.horizontalHeader().show()
     conn = cx_Oracle.connect(db)
@@ -140,14 +140,14 @@ def load_selected_order_info():
         ui.tableWidget_2.horizontalHeader().hide()
         ui.tableWidget_2.setRowCount(0)
         ui.tableWidget_3.setRowCount(0)
-        ui.label_4.setText('Заказ ' + order + ' еще в работе')
+        ui.label_4.setText(f'Заказ {order} еще в работе')
 
 
 def load_selected_container_info():
     ui.tableWidget_3.clear()
     row = ui.tableWidget_2.currentRow()
     cnt = ui.tableWidget_2.item(row, 0).text()
-    ui.label_5.setText('Товар(ы) в контейнере ' + cnt)
+    ui.label_5.setText(f'Товар(ы) в контейнере {cnt}')
     ui.tableWidget_3.setHorizontalHeaderLabels(['Артикул', 'Наименование', 'Количество', 'Кратность'])
     ui.tableWidget_3.horizontalHeader().show()
     conn = cx_Oracle.connect(db)
