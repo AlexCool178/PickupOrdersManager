@@ -40,23 +40,19 @@ def check_client_name(client):
 
 
 def check_client_exists(client):
-    id_list = []
     conn = cx_Oracle.connect(db)
     cursor = conn.cursor()
     cursor.execute(build_client_check_query(client))
-    for rec in cursor.fetchall():
-        id_list.append(rec)
+    id_list = [rec for rec in cursor.fetchall()]
     conn.close()
     return len(id_list) > 0
 
 
 def check_data_exists(client):
-    res = []
     conn = cx_Oracle.connect(db)
     cursor = conn.cursor()
     cursor.execute(build_check_data_query(client))
-    for rec in cursor.fetchall():
-        res.append(rec)
+    res = [rec for rec in cursor.fetchall()]
     conn.close()
     return len(res) > 0
 
